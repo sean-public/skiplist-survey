@@ -82,7 +82,7 @@ The chart above shows the **best-case insert** speeds. The vertical axis is nano
 
 ![zoom worse cases deletions](http://i.imgur.com/LQYoXuO.png)
 
-If we zoom in, we can see the speed differences between the fastest implementations.
+If we zoom in, we can see the speed differences between the fastest implementations a bit better. The fastest overall is `sean`, which averages 10-50ns faster in all operations than the next fastest implementation.
 
 
 
