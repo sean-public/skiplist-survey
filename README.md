@@ -20,6 +20,7 @@ Here are some brief notes on each implementation:
 - [github.com/huandu/skiplist](github.com/huandu/skiplist)
   - Globally sets *P* to *almost* 0.25 (using bitmasks and shifting) and can be changed at runtime.
   - You must specify a comparator and type for keys when creating the list.
+  - Keys are of type `interface{}`
   - Not threadsafe
 - [github.com/zhenjl/skiplist](github.com/zhenjl/skiplist)
   - Adjustable *P* value and max level per list.
@@ -52,9 +53,9 @@ go install github.com/sean-public/skiplist-survey
 skiplist-survey > output.csv
 ```
 
+The results are in CSV format for easy charting and analysis.
 
-
-Here are the results I recorded on a Macbook Pro 15 with a 2.7 GHz Intel Core i7 and 16GB RAM. It takes over an hour to run all the benchmarks.
+Here is a summary of results I recorded on a Macbook Pro 15 with a 2.7 GHz Intel Core i7 and 16GB RAM. It takes over an hour to run all the benchmarks.
 
 ![best inserts chart](http://i.imgur.com/Vo5etzd.png)
 
