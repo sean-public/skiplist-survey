@@ -43,7 +43,7 @@ Here are some brief notes on each implementation:
 
 
 
-#### Benchmarks
+### Benchmarks
 
 Running the benchmarks found in this repo locally is easy:
 
@@ -87,7 +87,7 @@ If we zoom in, we can see the speed differences between the fastest implementati
 
 
 
-#### Todo
+### Todo
 
 - (in progress now) Add multithreaded benchmarks with varying concurrency and read/write load proportions.
 
