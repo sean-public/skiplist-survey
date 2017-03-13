@@ -59,11 +59,4 @@ func main() {
 	for _, f := range allFunctions {
 		runIterations(funcName(f), start, end, step, f)
 	}
-
-	// wg.Add(10)
-	// for _, f := range mtchavez[1:] {
-	// 	go runIterations(funcName(f), start, end, step, f)
-	//  // do a "wg.Done()" in each of the functions!
-	// }
-	// wg.Wait()
 }
