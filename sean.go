@@ -11,7 +11,7 @@ func seanInserts(n int) {
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		list.Set(uint64(n-i), testByteString)
+		list.Set(float64(n-i), testByteString)
 	}
 }
 
@@ -20,7 +20,7 @@ func seanWorstInserts(n int) {
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		list.Set(uint64(i), testByteString)
+		list.Set(float64(i), testByteString)
 	}
 }
 
@@ -28,13 +28,13 @@ func seanAvgSearch(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(uint64(i), testByteString)
+		list.Set(float64(n-i), testByteString)
 	}
 
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_ = list.Get(uint64(i))
+		_ = list.Get(float64(i))
 	}
 }
 
@@ -42,13 +42,13 @@ func seanSearchEnd(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(uint64(i), testByteString)
+		list.Set(float64(n-i), testByteString)
 	}
 
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_ = list.Get(uint64(n))
+		_ = list.Get(float64(n))
 	}
 }
 
@@ -56,13 +56,13 @@ func seanDelete(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(uint64(i), testByteString)
+		list.Set(float64(n-i), testByteString)
 	}
 
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_ = list.Remove(uint64(i))
+		_ = list.Remove(float64(i))
 	}
 }
 
@@ -70,13 +70,13 @@ func seanWorstDelete(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(uint64(i), testByteString)
+		list.Set(float64(n-i), testByteString)
 	}
 
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_ = list.Remove(uint64(n - i))
+		_ = list.Remove(float64(n - i))
 	}
 }
 
