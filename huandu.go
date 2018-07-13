@@ -1,84 +1,109 @@
 package main
 
 import (
-	"time"
-
-	huaSkiplist "github.com/huandu/skiplist"
+    "time"
+    "math/rand"
+    huaSkiplist "github.com/huandu/skiplist"
 )
 
 func huanduInserts(n int) {
-	list := huaSkiplist.New(huaSkiplist.Int)
-	defer timeTrack(time.Now(), n)
+    list := huaSkiplist.New(huaSkiplist.Int)
+    defer timeTrack(time.Now(), n)
 
-	for i := 0; i < n; i++ {
-		list.Set(n-i, testByteString)
-	}
+    for i := 0; i < n; i++ {
+        list.Set(n-i, testByteString)
+    }
 }
 
 func huanduWorstInserts(n int) {
-	list := huaSkiplist.New(huaSkiplist.Int)
-	defer timeTrack(time.Now(), n)
+    list := huaSkiplist.New(huaSkiplist.Int)
+    defer timeTrack(time.Now(), n)
 
-	for i := 0; i < n; i++ {
-		list.Set(i, testByteString)
-	}
+    for i := 0; i < n; i++ {
+        list.Set(i, testByteString)
+    }
+}
+
+func huanduRandomInserts(n int) {
+    list := huaSkiplist.New(huaSkiplist.Int)
+    rList := rand.Perm(n)
+    defer timeTrack(time.Now(), n)
+
+    for _,e := range rList {
+        list.Set(e, testByteString)
+    }
 }
 
 func huanduAvgSearch(n int) {
-	list := huaSkiplist.New(huaSkiplist.Int)
+    list := huaSkiplist.New(huaSkiplist.Int)
 
-	for i := 0; i < n; i++ {
-		list.Set(i, testByteString)
-	}
+    for i := 0; i < n; i++ {
+        list.Set(i, testByteString)
+    }
 
-	defer timeTrack(time.Now(), n)
+    defer timeTrack(time.Now(), n)
 
-	for i := 0; i < n; i++ {
-		_ = list.Get(i)
-	}
+    for i := 0; i < n; i++ {
+        _ = list.Get(i)
+    }
 }
 
 func huanduSearchEnd(n int) {
-	list := huaSkiplist.New(huaSkiplist.Int)
+    list := huaSkiplist.New(huaSkiplist.Int)
 
-	for i := 0; i < n; i++ {
-		list.Set(i, testByteString)
-	}
+    for i := 0; i < n; i++ {
+        list.Set(i, testByteString)
+    }
 
-	defer timeTrack(time.Now(), n)
+    defer timeTrack(time.Now(), n)
 
-	for i := 0; i < n; i++ {
-		_ = list.Get(n)
-	}
+    for i := 0; i < n; i++ {
+        _ = list.Get(n)
+    }
 }
 
 func huanduDelete(n int) {
-	list := huaSkiplist.New(huaSkiplist.Int)
+    list := huaSkiplist.New(huaSkiplist.Int)
 
-	for i := 0; i < n; i++ {
-		list.Set(i, testByteString)
-	}
+    for i := 0; i < n; i++ {
+        list.Set(i, testByteString)
+    }
 
-	defer timeTrack(time.Now(), n)
+    defer timeTrack(time.Now(), n)
 
-	for i := 0; i < n; i++ {
-		_ = list.Remove(i)
-	}
+    for i := 0; i < n; i++ {
+        _ = list.Remove(i)
+    }
 }
 
 func huanduWorstDelete(n int) {
-	list := huaSkiplist.New(huaSkiplist.Int)
+    list := huaSkiplist.New(huaSkiplist.Int)
 
-	for i := 0; i < n; i++ {
-		list.Set(i, testByteString)
-	}
+    for i := 0; i < n; i++ {
+        list.Set(i, testByteString)
+    }
 
-	defer timeTrack(time.Now(), n)
+    defer timeTrack(time.Now(), n)
 
-	for i := 0; i < n; i++ {
-		_ = list.Remove(n - i)
-	}
+    for i := 0; i < n; i++ {
+        _ = list.Remove(n - i)
+    }
 }
 
-var huanduFunctions = []func(int){huanduInserts, huanduWorstInserts,
-	huanduAvgSearch, huanduSearchEnd, huanduDelete, huanduWorstDelete}
+func huanduRandomDelete(n int) {
+    list := huaSkiplist.New(huaSkiplist.Int)
+
+    for i := 0; i < n; i++ {
+        list.Set(i, testByteString)
+    }
+
+    rList := rand.Perm(n)
+    defer timeTrack(time.Now(), n)
+
+    for _,e := range rList {
+        _ = list.Remove(e)
+    }
+}
+
+var huanduFunctions = []func(int){huanduInserts, huanduWorstInserts, huanduRandomInserts,
+    huanduAvgSearch, huanduSearchEnd, huanduDelete, huanduWorstDelete, huanduRandomDelete}
