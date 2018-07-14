@@ -1,9 +1,9 @@
 package main
 
 import (
-	"time"
-
 	seaSkiplist "github.com/sean-public/fast-skiplist"
+	"math/rand"
+	"time"
 )
 
 func seanInserts(n int) {
@@ -21,6 +21,17 @@ func seanWorstInserts(n int) {
 
 	for i := 0; i < n; i++ {
 		list.Set(float64(i), testByteString)
+	}
+}
+
+func seanRandomInserts(n int) {
+	list := seaSkiplist.New()
+
+	rList := rand.Perm(n)
+
+	defer timeTrack(time.Now(), n)
+	for _, e := range rList {
+		list.Set(float64(e), testByteString)
 	}
 }
 
@@ -80,5 +91,21 @@ func seanWorstDelete(n int) {
 	}
 }
 
-var seanFunctions = []func(int){seanInserts, seanWorstInserts,
-	seanAvgSearch, seanSearchEnd, seanDelete, seanWorstDelete}
+func seanRandomDelete(n int) {
+	list := seaSkiplist.New()
+
+	for i := 0; i < n; i++ {
+		list.Set(float64(n-i), testByteString)
+	}
+
+	rList := rand.Perm(n)
+
+	defer timeTrack(time.Now(), n)
+
+	for _, e := range rList {
+		_ = list.Remove(float64(e))
+	}
+}
+
+var seanFunctions = []func(int){seanInserts, seanWorstInserts, seanRandomInserts,
+	seanAvgSearch, seanSearchEnd, seanDelete, seanWorstDelete, seanRandomDelete}

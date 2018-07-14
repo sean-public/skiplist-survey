@@ -1,9 +1,9 @@
 package main
 
 import (
-	"time"
-
 	zheSkiplist "github.com/zhenjl/skiplist"
+	"math/rand"
+	"time"
 )
 
 func zhenjlInserts(n int) {
@@ -21,6 +21,17 @@ func zhenjlWorstInserts(n int) {
 
 	for i := 0; i < n; i++ {
 		list.Insert(i, testByteString)
+	}
+}
+
+func zhenjlRandomInserts(n int) {
+	list := zheSkiplist.New(zheSkiplist.BuiltinLessThan)
+
+	rList := rand.Perm(n)
+
+	defer timeTrack(time.Now(), n)
+	for _, e := range rList {
+		list.Insert(e, testByteString)
 	}
 }
 
@@ -80,5 +91,21 @@ func zhenjlWorstDelete(n int) {
 	}
 }
 
-var zhenjlFunctions = []func(int){zhenjlInserts, zhenjlWorstInserts,
-	zhenjlAvgSearch, zhenjlSearchEnd, zhenjlDelete, zhenjlWorstDelete}
+func zhenjlRandomDelete(n int) {
+	list := zheSkiplist.New(zheSkiplist.BuiltinLessThan)
+
+	for i := 0; i < n; i++ {
+		list.Insert(i, testByteString)
+	}
+
+	rList := rand.Perm(n)
+
+	defer timeTrack(time.Now(), n)
+
+	for _, e := range rList {
+		_, _ = list.Delete(e)
+	}
+}
+
+var zhenjlFunctions = []func(int){zhenjlInserts, zhenjlWorstInserts, zhenjlRandomInserts,
+	zhenjlAvgSearch, zhenjlSearchEnd, zhenjlDelete, zhenjlWorstDelete, zhenjlRandomDelete}

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"time"
-
 	colSkiplist "github.com/golang-collections/go-datastructures/slice/skip"
+	"math/rand"
+	"time"
 )
 
 type mockEntry uint64
@@ -40,6 +40,17 @@ func colWorstInserts(n int) {
 
 	for i := 0; i < n; i++ {
 		list.Insert(newMockEntry(uint64(i)))
+	}
+}
+
+func colRandomInserts(n int) {
+	list := colSkiplist.New(uint(0))
+	rList := rand.Perm(n)
+
+	defer timeTrack(time.Now(), n)
+
+	for _, e := range rList {
+		list.Insert(newMockEntry(uint64(e)))
 	}
 }
 
@@ -99,5 +110,21 @@ func colWorstDelete(n int) {
 	}
 }
 
-var colFunctions = []func(int){colInserts, colWorstInserts,
-	colAvgSearch, colSearchEnd, colDelete, colWorstDelete}
+func colRandomDelete(n int) {
+
+	list := colSkiplist.New(uint(0))
+
+	for i := 0; i < n; i++ {
+		list.Insert(newMockEntry(uint64(i)))
+	}
+
+	rList := rand.Perm(n)
+	defer timeTrack(time.Now(), n)
+
+	for _, e := range rList {
+		_ = list.Delete(newMockEntry(uint64(e)))
+	}
+}
+
+var colFunctions = []func(int){colInserts, colWorstInserts, colRandomInserts,
+	colAvgSearch, colSearchEnd, colDelete, colWorstDelete, colRandomDelete}

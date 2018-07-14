@@ -1,9 +1,9 @@
 package main
 
 import (
-	"time"
-
 	huaSkiplist "github.com/huandu/skiplist"
+	"math/rand"
+	"time"
 )
 
 func huanduInserts(n int) {
@@ -21,6 +21,16 @@ func huanduWorstInserts(n int) {
 
 	for i := 0; i < n; i++ {
 		list.Set(i, testByteString)
+	}
+}
+
+func huanduRandomInserts(n int) {
+	list := huaSkiplist.New(huaSkiplist.Int)
+	rList := rand.Perm(n)
+	defer timeTrack(time.Now(), n)
+
+	for _, e := range rList {
+		list.Set(e, testByteString)
 	}
 }
 
@@ -80,5 +90,20 @@ func huanduWorstDelete(n int) {
 	}
 }
 
-var huanduFunctions = []func(int){huanduInserts, huanduWorstInserts,
-	huanduAvgSearch, huanduSearchEnd, huanduDelete, huanduWorstDelete}
+func huanduRandomDelete(n int) {
+	list := huaSkiplist.New(huaSkiplist.Int)
+
+	for i := 0; i < n; i++ {
+		list.Set(i, testByteString)
+	}
+
+	rList := rand.Perm(n)
+	defer timeTrack(time.Now(), n)
+
+	for _, e := range rList {
+		_ = list.Remove(e)
+	}
+}
+
+var huanduFunctions = []func(int){huanduInserts, huanduWorstInserts, huanduRandomInserts,
+	huanduAvgSearch, huanduSearchEnd, huanduDelete, huanduWorstDelete, huanduRandomDelete}

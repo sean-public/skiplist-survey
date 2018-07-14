@@ -1,9 +1,9 @@
 package main
 
 import (
-	"time"
-
 	rysSkiplist "github.com/ryszard/goskiplist/skiplist"
+	"math/rand"
+	"time"
 )
 
 func ryszardInserts(n int) {
@@ -21,6 +21,17 @@ func ryszardWorstInserts(n int) {
 
 	for i := 0; i < n; i++ {
 		list.Set(i, testByteString)
+	}
+}
+
+func ryszardRandomInserts(n int) {
+	list := rysSkiplist.NewIntMap()
+	rList := rand.Perm(n)
+
+	defer timeTrack(time.Now(), n)
+
+	for _, e := range rList {
+		list.Set(e, testByteString)
 	}
 }
 
@@ -80,5 +91,20 @@ func ryszardWorstDelete(n int) {
 	}
 }
 
-var ryszardFunctions = []func(int){ryszardInserts, ryszardWorstInserts,
-	ryszardAvgSearch, ryszardSearchEnd, ryszardDelete, ryszardWorstDelete}
+func ryszardRandomDelete(n int) {
+	list := rysSkiplist.NewIntMap()
+
+	for i := 0; i < n; i++ {
+		list.Set(i, testByteString)
+	}
+
+	rList := rand.Perm(n)
+	defer timeTrack(time.Now(), n)
+
+	for _, e := range rList {
+		_, _ = list.Delete(e)
+	}
+}
+
+var ryszardFunctions = []func(int){ryszardInserts, ryszardWorstInserts, ryszardRandomInserts,
+	ryszardAvgSearch, ryszardSearchEnd, ryszardDelete, ryszardWorstDelete, ryszardRandomDelete}

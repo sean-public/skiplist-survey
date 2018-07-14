@@ -55,6 +55,7 @@ func main() {
 	allFunctions = append(allFunctions, huanduFunctions...)
 	allFunctions = append(allFunctions, colFunctions...)
 	allFunctions = append(allFunctions, ryszardFunctions...)
+	allFunctions = append(allFunctions, mtFunctions...)
 
 	for _, f := range allFunctions {
 		runIterations(funcName(f), start, end, step, f)
