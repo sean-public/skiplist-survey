@@ -75,7 +75,7 @@ The vertical axis is **nanoseconds per operation**, the horizontal is the number
 ![random inserts chart](graphs/randomInserts.png)
 **Random inserts.** The inserts are at random positions in the skiplist, making this the closest real-world case for inserts. The approximately logarithmic behaviour is clearly visible for all implementations even though the overhead makes `ryszard` take 3x as long as `mauriceGit (mt)`.
 
-![average search chart](graphs/search.png)
+![average search chart](graphs/avgSearch.png)
 **Average search speed**. `mtchavez`, `sean` and `mauriceGit (mt)` are approximately equally fast. `zhenjl` seems to introduce some serious overhead, making it more than 8x as slow as the fastest implementations.
 
 ![worst case delete chart](graphs/worstDelete.png)
