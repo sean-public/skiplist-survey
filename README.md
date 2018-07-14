@@ -39,7 +39,7 @@ Here are some brief notes on each implementation:
   - Not threadsafe
 - [github.com/sean-public/fast-skiplist](https://github.com/sean-public/fast-skiplist)
   - Counting only concurrent implementations, `sean`  is the fastest.
-  - Overall it is always the second fastest in all benchmarks (With a few on-par with `MauriceGit`) and `huandu` coming very close in most benchmarks.
+  - Overall it is always the second fastest in all benchmarks (With a few on-par with `mauriceGit (mt)`) and `huandu` coming very close in most benchmarks.
   - See fast-skiplist's README for details on how this is achieved.
 - [github.com/MauriceGit/skiplist](https://github.com/MauriceGit/skiplist)
   - Fastest non-concurrent implementation over all benchmarks. `sean` is on-par regarding **search** and **worstDelete**.
@@ -61,41 +61,28 @@ skiplist-survey > output.csv
 
 The results are in CSV format for easy charting and analysis.
 
-Here is a summary of results I recorded on a Macbook Pro 15 with a 2.7 GHz Intel Core i7 and 16GB RAM. It takes over an hour to run all the benchmarks.
+Here is a summary of results I recorded on a Dell Precision with a 2.2 GHz Intel Core i7 (2720QM) and 8GB RAM. It takes over an hour to run all the benchmarks.
 
 The vertical axis is **nanoseconds per operation**, the horizontal is the number of items in the list.
 
 
-
 ![best inserts chart](graphs/inserts.png)
-
 **Best-case insert**. These are the "best" inserts because they happen at the front of the list, which shouldn't require any searching. The difference in speed here demonstrates the overhead each package introduces in even the most basic operations.
 
-
-
 ![worst inserts chart](graphs/worstInserts.png)
-
 **Worst-case inserts.** These inserts are at the end of the list, requiring searching all the way to the end and then adding the new node. Even though all implementations only show a small variance even after millions of nodes are added, we can still see very large differences in overall speed because of implementation overhead.
 
-
 ![random inserts chart](graphs/randomInserts.png)
-
 **Random inserts.** The inserts are at random positions in the skiplist, making this the closest real-world case for inserts. The approximately logarithmic behaviour is clearly visible for all implementations even though the overhead makes `ryszard` take 3x as long as `mauriceGit (mt)`.
 
-
 ![average search chart](graphs/search.png)
-
 **Average search speed**. `mtchavez`, `sean` and `mauriceGit (mt)` are approximately equally fast. `zhenjl` seems to introduce some serious overhead, making it more than 8x as slow as the fastest implementations.
 
-
 ![worst case delete chart](graphs/worstDelete.png)
-
 **Worst case deletions**. In this benchmark, a skip list of a given length is created and then every item is removed, starting from the last one and moving to the front.
 `mauriceGit (mt)` and `sean` are around equally fast with around 100ns faster than the next contestant (`huandu`).
 
-
 ![random delete chart](graphs/randomDelete.png)
-
 **Random deletions**. Elements are removed from random positions in the skiplist. For Deletions, this is the closest to a real-world case. We can clearly see the the logarithmic behaviour, even though some implementations have a large overhead involved.
 Just like for randomInserts, `mauriceGit (mt)` is the fastest, closely followed by `sean`.
 
