@@ -87,7 +87,7 @@ The vertical axis is **nanoseconds per operation**, the horizontal is the number
 Just like for randomInserts, `mauriceGit (mt)` is the fastest, closely followed by `sean`.
 
 
-[my-file.md](./visualize/png.md)
+[Visualization.md](./visualize/png.md)
 
 ### Todo
 
