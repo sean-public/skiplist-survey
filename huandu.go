@@ -1,9 +1,10 @@
 package main
 
 import (
-	huaSkiplist "github.com/huandu/skiplist"
 	"math/rand"
 	"time"
+
+	huaSkiplist "github.com/huandu/skiplist"
 )
 
 func huanduInserts(n int) {
@@ -58,7 +59,7 @@ func huanduSearchEnd(n int) {
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_ = list.Get(n)
+		_ = list.Get(n - 1)
 	}
 }
 

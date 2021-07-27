@@ -78,7 +78,7 @@ func colSearchEnd(n int) {
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_, _ = list.GetWithPosition(newMockEntry(uint64(n)))
+		_, _ = list.GetWithPosition(newMockEntry(uint64(n - 1)))
 	}
 }
 

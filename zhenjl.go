@@ -1,9 +1,10 @@
 package main
 
 import (
-	zheSkiplist "github.com/zhenjl/skiplist"
 	"math/rand"
 	"time"
+
+	zheSkiplist "github.com/zhenjl/skiplist"
 )
 
 func zhenjlInserts(n int) {
@@ -59,7 +60,7 @@ func zhenjlSearchEnd(n int) {
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_, _ = list.Select(n)
+		_, _ = list.Select(n - 1)
 	}
 }
 

@@ -1,9 +1,10 @@
 package main
 
 import (
-	seaSkiplist "github.com/sean-public/fast-skiplist"
 	"math/rand"
 	"time"
+
+	seaSkiplist "github.com/sean-public/fast-skiplist"
 )
 
 func seanInserts(n int) {
@@ -39,7 +40,7 @@ func seanAvgSearch(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(float64(n-i), testByteString)
+		list.Set(float64(i), testByteString)
 	}
 
 	defer timeTrack(time.Now(), n)
@@ -53,13 +54,13 @@ func seanSearchEnd(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(float64(n-i), testByteString)
+		list.Set(float64(i), testByteString)
 	}
 
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_ = list.Get(float64(n))
+		_ = list.Get(float64(n - 1))
 	}
 }
 
@@ -67,7 +68,7 @@ func seanDelete(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(float64(n-i), testByteString)
+		list.Set(float64(i), testByteString)
 	}
 
 	defer timeTrack(time.Now(), n)
@@ -81,7 +82,7 @@ func seanWorstDelete(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(float64(n-i), testByteString)
+		list.Set(float64(i), testByteString)
 	}
 
 	defer timeTrack(time.Now(), n)
@@ -95,7 +96,7 @@ func seanRandomDelete(n int) {
 	list := seaSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Set(float64(n-i), testByteString)
+		list.Set(float64(i), testByteString)
 	}
 
 	rList := rand.Perm(n)

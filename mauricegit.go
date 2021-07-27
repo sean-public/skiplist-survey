@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	mtSkiplist "github.com/MauriceGit/skiplist"
 	"math/rand"
 	"time"
+
+	mtSkiplist "github.com/MauriceGit/skiplist"
 )
 
 type element uint64
@@ -49,7 +50,7 @@ func mtAvgSearch(n int) {
 	list := mtSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Insert(element(n - i))
+		list.Insert(element(i))
 	}
 
 	defer timeTrack(time.Now(), n)
@@ -63,13 +64,13 @@ func mtSearchEnd(n int) {
 	list := mtSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Insert(element(n - i))
+		list.Insert(element(i))
 	}
 
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_, _ = list.Find(element(n))
+		_, _ = list.Find(element(n - 1))
 	}
 }
 
@@ -77,7 +78,7 @@ func mtDelete(n int) {
 	list := mtSkiplist.New()
 
 	for i := 0; i < n; i++ {
-		list.Insert(element(n - i))
+		list.Insert(element(i))
 	}
 
 	defer timeTrack(time.Now(), n)

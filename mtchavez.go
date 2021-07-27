@@ -1,9 +1,10 @@
 package main
 
 import (
-	mtcSkiplist "github.com/mtchavez/skiplist"
 	"math/rand"
 	"time"
+
+	mtcSkiplist "github.com/mtchavez/skiplist"
 )
 
 func mtchavezInserts(n int) {
@@ -58,7 +59,7 @@ func mtchavezSearchEnd(n int) {
 	defer timeTrack(time.Now(), n)
 
 	for i := 0; i < n; i++ {
-		_ = list.Search(n)
+		_ = list.Search(n - 1)
 	}
 }
 
